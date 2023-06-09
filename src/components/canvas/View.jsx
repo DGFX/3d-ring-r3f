@@ -26,7 +26,7 @@ const View = forwardRef(({ children, orbit, spaceDust, ...props }, ref) => {
         <ViewImpl track={localRef}>
           {children}
           {orbit && <OrbitControls />}
-          {spaceDust && <SpaceDust count={1000} />}
+          {spaceDust && <SpaceDust count={250} />}
         </ViewImpl>
       </Three>
     </>

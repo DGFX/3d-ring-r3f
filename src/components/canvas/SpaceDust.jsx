@@ -1,12 +1,13 @@
+import * as THREE from 'three';
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-// import Random from 'canvas-sketch-util/random';
+import Random from 'canvas-sketch-util/random';
 
 export function SpaceDust({ count }) {
     const mesh = useRef();
     const light = useRef();
 
-    // Generate some random positions, speed factors and timings
+    // Generate some Random positions, speed factors and timings
     const particles = useMemo(() => {
         const temp = [];
         for (let i = 0; i < count; i++) {
@@ -25,7 +26,7 @@ export function SpaceDust({ count }) {
     const dummy = useMemo(() => new THREE.Object3D(), []);
 
     useFrame(() => {
-        // Run through the randomized data to calculate some movement
+        // Run through the Randomized data to calculate some movement
         particles.forEach((particle, index) => {
             let { factor, speed, x, y, z } = particle;
 
@@ -33,7 +34,7 @@ export function SpaceDust({ count }) {
             const t = (particle.time += speed);
 
             // Update the particle position based on the time
-            // This is mostly random trigonometry functions to oscillate around the (x, y, z) point
+            // This is mostly Random trigonometry functions to oscillate around the (x, y, z) point
             dummy.position.set(
                 x + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
                 y + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
@@ -57,8 +58,8 @@ export function SpaceDust({ count }) {
         <>
             <pointLight ref={light} distance={40} intensity={8} color="#FFFFFF" />
             <instancedMesh ref={mesh} args={[null, null, count]}>
-                <dodecahedronGeometry args={[0.2, 0]} />
-                <meshPhongMaterial color="#FFFFFF" />
+                <dodecahedronGeometry args={[0.01, 0]} />
+                <meshPhongMaterial color="#8d8d8d" />
             </instancedMesh>
         </>
     );

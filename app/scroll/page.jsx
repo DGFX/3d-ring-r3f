@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import * as THREE from 'three';
 
 // const Ring = dynamic(() => import('@/components/models/Ring'), { ssr: false })
 import { Ring } from "@/components/models/Ring"
@@ -34,7 +33,7 @@ export default function Page() {
                 </div>
             </div>
 
-            <View orbit spaceDust className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
+            <View orbit className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
                 {/* <Ring /> */}
                 <ExampleRing />
                 <Common />
