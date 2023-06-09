@@ -17,3 +17,13 @@
     overflow: hidden;
   }
 }
+
+body {
+  font-size: 18px;
+  color: white;
+  background-image: linear-gradient(#181818 0%, black 100%);
+}
+
+nav {
+  z-index: 9999;
+}
