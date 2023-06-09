@@ -1,9 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import * as THREE from 'three';
 
 // const Ring = dynamic(() => import('@/components/models/Ring'), { ssr: false })
 import { Ring } from "@/components/models/Ring"
+import { ExampleRing } from "@/components/models/exampleRing"
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
@@ -26,15 +29,18 @@ export default function Page() {
         <>
             <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
                 <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-                    <p className='w-full uppercase'>Ring Scroll Test</p>
-                    <h1 className='my-4 text-5xl font-bold leading-tight'>Scroll Animation Test</h1>
-                    <p className='mb-8 text-2xl leading-normal'>Jestem poprostu w kurwe ciekawy jak z tym pójdzie</p>
+                    <p className='w-full uppercase'>Example model</p>
+                    <h1 className='my-4 text-5xl font-bold leading-tight'>OLSZAR 3D Test</h1>
                 </div>
             </div>
 
-            <View orbit className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
-                <Ring />
+            <View orbit spaceDust className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
+                {/* <Ring /> */}
+                <ExampleRing />
                 <Common />
+                <EffectComposer>
+                    <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
+                </EffectComposer>
             </View>
         </>
     )
