@@ -3,7 +3,7 @@
 import { forwardRef, Suspense, useImperativeHandle, useRef, useMemo } from 'react'
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
-import { SpaceDust } from './spaceDust'
+import { SpaceDust } from 'SpaceDust'
 
 export const Common = ({ color }) => (
   <Suspense fallback={null}>
