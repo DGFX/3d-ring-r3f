@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import * as THREE from "three"
 
 // const Ring = dynamic(() => import('@/components/models/Ring'), { ssr: false })
 import { Ring } from "@/components/models/Ring"
