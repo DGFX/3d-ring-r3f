@@ -1,12 +1,13 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import * as THREE from "three"
+
+// import * as THREE from "three"
 
 // const Ring = dynamic(() => import('@/components/models/Ring'), { ssr: false })
-import { Ring } from "@/components/models/Ring"
-import { ExampleRing } from "@/components/models/exampleRing"
+// import { Ring } from "@/components/models/Ring"
+import ExampleRing from "@/components/models/exampleRing"
+// const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
     loading: () => (
@@ -38,9 +39,7 @@ export default function Page() {
                 {/* <Ring /> */}
                 <ExampleRing />
                 <Common />
-                <EffectComposer>
-                    <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
-                </EffectComposer>
+
             </View>
         </>
     )

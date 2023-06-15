@@ -9,7 +9,7 @@ import { RGBELoader } from 'three-stdlib'
 import { useLoader } from "@react-three/fiber";
 
 
-export function ExampleRing(props) {
+export default function ExampleRing(props) {
     const { nodes, materials } = useGLTF("/ring-random.glb");
     const diamondTexture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
 
