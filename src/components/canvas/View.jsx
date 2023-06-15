@@ -2,19 +2,33 @@
 
 import { forwardRef, Suspense, useImperativeHandle, useRef, useState, useMemo } from 'react'
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
+import { useControls } from 'leva'
 import { Three } from '@/helpers/components/Three'
 import { SpaceDust } from './SpaceDust'
 import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing'
 
-export const Common = ({ color }) => (
-  <Suspense fallback={null}>
-    {color && <color attach='background' args={[color]} />}
-    <ambientLight color='white' intensity={0.5} />
-    <pointLight position={[20, 30, 10]} intensity={1} />
-    <pointLight position={[-10, -10, -10]} color='white' />
-    <PerspectiveCamera makeDefault fov={40} position={[0, 0, 6]} />
-  </Suspense>
-)
+export const Common = ({ color }) => {
+  const config = useMemo(() => {
+    return {
+      // ambientStrength: { value: 3, min: 0, max: 8, step: 1 },
+      // ambientColor: "white",
+      pointLightIntensity: { value: 2.75, min: 0, max: 10 },
+      pointLightColor: "white",
+    }
+  })
+
+  const lightControls = useControls("Światło", config)
+
+  return (
+    <Suspense fallback={null}>
+      {color && <color attach='background' args={[color]} />}
+      <pointLight position={[20, 30, 10]} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[-10, -10, -10]} color={lightControls.pointLightColor} />
+      <pointLight position={[0, 0, 20]} color={lightControls.pointLightColor} />
+      <PerspectiveCamera makeDefault fov={40} position={[0, 0, 6]} />
+    </Suspense>
+  )
+}
 
 const View = forwardRef(({ children, orbit, spaceDust, noise, ...props }, ref) => {
   const localRef = useRef(null)

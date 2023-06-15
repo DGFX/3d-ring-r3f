@@ -1,6 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
+import { useMemo } from "react"
 import ExampleRing from "@/components/models/exampleRing"
+import { useControls } from 'leva'
+
 // const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
@@ -19,7 +22,17 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
+
 export default function Page() {
+
+    const config = useMemo(() => {
+        return {
+            orbit: true,
+            spaceDust: false
+        }
+    }, [])
+    const sceneControls = useControls("Scena", config)
+
     return (
         <>
             <div className='mx-auto flex w-full flex-col flex-wrap items-center justify-center md:flex-row lg:w-4/5'>
@@ -29,11 +42,11 @@ export default function Page() {
                 </div>
             </div>
 
-            <View orbit className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
+            <View {...sceneControls} className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
                 {/* <Ring /> */}
+                <ambientLight />
                 <ExampleRing />
                 <Common />
-
             </View>
         </>
     )
