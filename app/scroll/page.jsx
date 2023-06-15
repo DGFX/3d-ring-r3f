@@ -1,11 +1,5 @@
 'use client'
-
 import dynamic from 'next/dynamic'
-
-// import * as THREE from "three"
-
-// const Ring = dynamic(() => import('@/components/models/Ring'), { ssr: false })
-// import { Ring } from "@/components/models/Ring"
 import ExampleRing from "@/components/models/exampleRing"
 // const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
