@@ -4,7 +4,7 @@ import { forwardRef, Suspense, useImperativeHandle, useRef, useState, useMemo } 
 import { OrbitControls, PerspectiveCamera, View as ViewImpl } from '@react-three/drei'
 import { Three } from '@/helpers/components/Three'
 import { SpaceDust } from './SpaceDust'
-import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing'
 
 export const Common = ({ color }) => (
   <Suspense fallback={null}>
@@ -16,7 +16,7 @@ export const Common = ({ color }) => (
   </Suspense>
 )
 
-const View = forwardRef(({ children, orbit, spaceDust, ...props }, ref) => {
+const View = forwardRef(({ children, orbit, spaceDust, noise, ...props }, ref) => {
   const localRef = useRef(null)
   useImperativeHandle(ref, () => localRef.current)
 
@@ -31,6 +31,7 @@ const View = forwardRef(({ children, orbit, spaceDust, ...props }, ref) => {
           {spaceDust && <SpaceDust count={250} />}
           <EffectComposer>
             <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
+            {noise && <Noise />}
           </EffectComposer>
         </ViewImpl>
       </Three>

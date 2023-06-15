@@ -19,7 +19,7 @@ export default function ExampleRing(props) {
         ior: { value: 2.75, min: 0, max: 10 },
         fresnel: { value: 1, min: 0, max: 1 },
         color: 'white',
-        fastChroma: true
+        fastChroma: false
     })
 
     return (
