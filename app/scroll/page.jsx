@@ -44,7 +44,10 @@ export default function Page() {
 
             <View {...sceneControls} className='absolute top-0 flex h-screen w-full flex-col items-center justify-center'>
                 {/* <Ring /> */}
-                <ambientLight />
+                {/* <mesh>
+                    <boxGeometry />
+                    <meshStandardMaterial color="hotpink" />
+                </mesh> */}
                 <ExampleRing />
                 <Common />
             </View>

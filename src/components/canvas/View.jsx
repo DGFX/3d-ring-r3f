@@ -10,9 +10,9 @@ import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing'
 export const Common = ({ color }) => {
   const config = useMemo(() => {
     return {
-      // ambientStrength: { value: 3, min: 0, max: 8, step: 1 },
-      // ambientColor: "white",
-      pointLightIntensity: { value: 2.75, min: 0, max: 10 },
+      ambientStrength: { value: 0.05, min: 0, max: 1, step: 0.01 },
+      ambientColor: "white",
+      pointLightIntensity: { value: 1.9, min: 0, max: 5, step: 0.01 },
       pointLightColor: "white",
     }
   })
@@ -22,9 +22,10 @@ export const Common = ({ color }) => {
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
-      <pointLight position={[20, 30, 10]} intensity={lightControls.pointLightIntensity} />
-      <pointLight position={[-10, -10, -10]} color={lightControls.pointLightColor} />
-      <pointLight position={[0, 0, 20]} color={lightControls.pointLightColor} />
+      <ambientLight color={lightControls.ambientColor} intensity={lightControls.ambientStrength} />
+      <pointLight position={[20, 30, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[-10, -10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      {/* <pointLight position={[0, 0, 20]} color={lightControls.pointLightColor} /> */}
       <PerspectiveCamera makeDefault fov={40} position={[0, 0, 6]} />
     </Suspense>
   )
