@@ -44,10 +44,10 @@ const View = forwardRef(({ children, orbit, spaceDust, noise, ...props }, ref) =
           {orbit &&
             <OrbitControls />}
           {spaceDust && <SpaceDust count={250} />}
-          <EffectComposer>
+          {/* <EffectComposer>
             <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
             {noise && <Noise />}
-          </EffectComposer>
+          </EffectComposer> */}
         </ViewImpl>
       </Three>
     </>
