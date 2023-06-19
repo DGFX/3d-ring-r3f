@@ -1,8 +1,8 @@
 {
-  "name": "react-three-next",
-  "version": "2.0.0",
+  "name": "3d-ring-r3f",
+  "version": "1.0.0",
   "authors": [
-    "Renaud ROHLINGER <https://twitter.com/onirenaud>"
+    "DOMINIK FOJCIK <https://fojcikdominik.com>"
   ],
   "license": "MIT",
   "private": true,
