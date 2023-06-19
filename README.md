@@ -1,4 +1,4 @@
-### ⚫ React Three Fiber ring demo :
+### ⚫ React Three Fiber Ring Demo :
 
 [![image](https://user-images.githubusercontent.com/15867665/231395343-fd4770e3-0e39-4f5c-ac30-71d823a9ef1c.png)](https://react-three-next.vercel.app/)
 
