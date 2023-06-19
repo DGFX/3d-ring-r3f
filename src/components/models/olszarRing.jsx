@@ -4,7 +4,7 @@ Command: npx gltfjsx@6.2.3 jebany-ring.glb -d -k
 */
 
 import React, { useRef, useMemo } from "react";
-import { useGLTF, Caustics, MeshRefractionMaterial, useCubeTexture } from "@react-three/drei";
+import { useGLTF, Caustics, MeshRefractionMaterial, AccumulativeShadows, RandomizedLight, useCubeTexture } from "@react-three/drei";
 import { useControls } from 'leva'
 import { RGBELoader } from 'three-stdlib'
 import { useLoader } from "@react-three/fiber";
@@ -54,10 +54,12 @@ export default function OlszarRing(props) {
     color: "white"
   });
 
+
   return (
     <group {...props} dispose={null}>
       <mesh name="kamienie-boczne" geometry={nodes['kamienie-boczne'].geometry} material={nodes['kamienie-boczne'].material}>
-        <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
+        {/* <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} /> */}
+        <meshStandardMaterial metalness={metalness} envMap={envTexture} roughness={roughness} color={color} />
       </mesh>
       <mesh name="kamień-centralny" geometry={nodes['kamień-centralny'].geometry} material={nodes['kamień-centralny'].material}>
         <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
@@ -68,6 +70,9 @@ export default function OlszarRing(props) {
       <mesh name="szyna" geometry={nodes.szyna.geometry} material={nodes.szyna.material}>
         <meshStandardMaterial metalness={metalness} envMap={envTexture} roughness={roughness} color={color} />
       </mesh>
+      {/* <AccumulativeShadows temporal frames={100} alphaTest={0.95} opacity={1} scale={20}>
+        <RandomizedLight amount={8} radius={10} ambient={0.5} position={[0, 10, -2.5]} bias={0.001} size={3} />
+      </AccumulativeShadows> */}
     </group>
   )
 }
