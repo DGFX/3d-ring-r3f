@@ -15,7 +15,7 @@ export default function ExampleRing(props) {
 
     // Ring Enviroment Map
 
-    const envMap = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env/" })
+    const envMap = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env2/" })
 
     // Diamond Controls
     const diamondConfig = useMemo(() => {
@@ -50,7 +50,7 @@ export default function ExampleRing(props) {
     //  */
     const { metalness, roughness, color, envId } = useControls("Kolor Pierścionka", {
         metalness: { value: 1, min: 0, max: 2, step: .01 },
-        roughness: { value: 0.1, min: 0, max: 1, step: .01 },
+        roughness: { value: 0.08, min: 0, max: 1, step: .01 },
         color: "white",
     });
 

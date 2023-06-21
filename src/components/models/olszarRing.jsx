@@ -19,7 +19,8 @@ export default function OlszarRing(props) {
   const diamondAltTexture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr')
 
   // Ring Enviroment Map
-  const envMap = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env/" })
+  const envMap1 = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env1/" })
+  // const envMap2 = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env2/" })
 
 
   // Diamond Controls
@@ -46,9 +47,12 @@ export default function OlszarRing(props) {
   // Ring Position Controls
   const ringPositionConfig = useMemo(() => {
     return {
-      x: { value: -1.7, min: -6, max: 6, step: .1 },
+      x: { value: 0, min: -6, max: 6, step: .1 },
       y: { value: 0, min: -6, max: 6, step: .1 },
       z: { value: 0, min: 0, max: 6, step: .1 },
+      rotateX: { value: 0, min: 0, max: 6, step: .1 },
+      rotateY: { value: 0, min: 0, max: 6, step: .1 },
+      rotateZ: { value: 0, min: 0, max: 6, step: .1 },
     }
   }, [])
 
@@ -58,7 +62,7 @@ export default function OlszarRing(props) {
   const ringMaterialConfig = useMemo(() => {
     return {
       metalness: { value: 1, min: 0, max: 2, step: .01 },
-      roughness: { value: 0.1, min: 0, max: 1, step: .01 },
+      roughness: { value: 0.08, min: 0, max: 1, step: .01 },
       color: "white",
       envId: { value: 0, min: 0, max: 8, step: 1 }
     }
@@ -85,28 +89,28 @@ export default function OlszarRing(props) {
 
 
   return (
-    <group {...props} dispose={null} scale={0.06} position={[ringPositionControls.x, ringPositionControls.y, ringPositionControls.z,]}>
-      <mesh name="kamienie-boczne" geometry={nodes['kamienie-boczne'].geometry} material={nodes['kamienie-boczne'].material}>
+    <group {...props} dispose={null} scale={0.06} position={[ringPositionControls.x, ringPositionControls.y, ringPositionControls.z,]} rotation={[ringPositionControls.rotateX, ringPositionControls.rotateY, ringPositionControls.rotateZ]}>
+      <mesh name="kamienie-boczne" geometry={nodes['kamienie-boczne'].geometry}>
         {mobileControls.mobile
           // Desktop and Mobile side diamonds version
-          ? <meshPhysicalMaterial envMap={envMap} {...diamondMobileControls} color={diamondControls.color} />
+          ? <meshPhysicalMaterial envMap={envMap1} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
-      <mesh name="kamień-centralny" geometry={nodes['kamień-centralny'].geometry} material={nodes['kamień-centralny'].material}>
+      <mesh name="kamień-centralny" geometry={nodes['kamień-centralny'].geometry} >
         {mobileControls.mobile
           // Desktop and Mobile central diamond version
-          ? <meshPhysicalMaterial envMap={envMap} {...diamondMobileControls} color={diamondControls.color} />
+          ? <meshPhysicalMaterial envMap={envMap1} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
-      <mesh name="oprawa" geometry={nodes.oprawa.geometry} material={nodes.oprawa.material}>
-        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap} />
+      <mesh name="oprawa" geometry={nodes.oprawa.geometry}>
+        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap1} />
       </mesh>
-      <mesh name="szyna" geometry={nodes.szyna.geometry} material={nodes.szyna.material}>
-        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap} />
+      <mesh name="szyna" geometry={nodes.szyna.geometry}>
+        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap1} />
       </mesh>
-    </group>
+    </group >
   )
 }
 

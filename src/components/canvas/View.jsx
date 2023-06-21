@@ -12,32 +12,41 @@ export const Common = ({ color }) => {
     return {
       ambientStrength: { value: 0.05, min: 0, max: 1, step: 0.01 },
       ambientColor: "white",
-      pointLightIntensity: { value: 5, min: 0, max: 10, step: 0.01 },
+      pointLightIntensity: { value: 5, min: 0, max: 25, step: 0.01 },
       pointLightColor: "white",
     }
   })
 
+  const cameraConfig = useMemo(() => {
+    return {
+      x: { value: 0, min: -20, max: 20, step: 0.01 },
+      y: { value: 0, min: -20, max: 20, step: 0.01 },
+      z: { value: 6, min: -20, max: 20, step: 0.01 },
+    }
+  })
+
   const lightControls = useControls("Światło", config)
+  const cameraControls = useControls("Kamera", cameraConfig)
 
   return (
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
       <ambientLight color={lightControls.ambientColor} intensity={lightControls.ambientStrength} />
       {/* Left/Right Lights */}
-      <pointLight position={[20, 0, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
-      <pointLight position={[-20, 0, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[30, 0, 20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[-30, 0, 20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
       {/* Top Side Lights */}
-      <pointLight position={[10, 10, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
-      <pointLight position={[-10, 10, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[20, 20, 20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[-20, 20, 20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
       {/* Bottom Side Lights */}
-      <pointLight position={[10, 10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
-      <pointLight position={[-10, 10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[20, 20, -20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[-20, 20, -20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
       {/* Top/Bottom Lights */}
-      <pointLight position={[0, 30, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
-      <pointLight position={[0, -30, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[0, 40, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[0, -40, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
       {/* Front Light */}
-      <pointLight position={[0, 0, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
-      <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
+      <pointLight position={[0, 0, -20]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <PerspectiveCamera makeDefault fov={30} position={[cameraControls.x, cameraControls.y, cameraControls.z]} />
     </Suspense>
   )
 }
@@ -55,10 +64,10 @@ const View = forwardRef(({ children, orbit, spaceDust, noise, ...props }, ref) =
           {orbit &&
             <OrbitControls />}
           {spaceDust && <SpaceDust count={250} />}
-          {/* <EffectComposer>
+          <EffectComposer>
             <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />
             {noise && <Noise />}
-          </EffectComposer> */}
+          </EffectComposer>
         </ViewImpl>
       </Three>
     </>
