@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react"
 import { Canvas, useThree } from '@react-three/fiber'
-import { PerformanceMonitor, Preload } from '@react-three/drei'
+import { PerformanceMonitor, Preload, Loader } from '@react-three/drei'
 import { r3f } from '@/helpers/global'
 
 function AdaptivePixelRatio() {
@@ -24,13 +24,16 @@ export default function Scene({ ...props }) {
 
 
   return (
-    <Canvas performance={{ min: 0.5 }} {...props} frameloop="demand" dpr={window.devicePixelRatio}>
-      <PerformanceMonitor onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}>
-        {/* @ts-ignore */}
-        <r3f.Out />
-        <Preload all />
-        {/* <AdaptivePixelRatio /> */}
-      </PerformanceMonitor>
-    </Canvas>
+    <>
+      <Canvas performance={{ min: 0.5 }} {...props} frameloop="demand" dpr={window.devicePixelRatio}>
+        <PerformanceMonitor onChange={({ factor }) => setDpr(round(0.5 + 1.5 * factor, 1))}>
+          {/* @ts-ignore */}
+          <r3f.Out />
+          <Preload all />
+          {/* <AdaptivePixelRatio /> */}
+        </PerformanceMonitor>
+      </Canvas>
+      <Loader />
+    </>
   )
 }

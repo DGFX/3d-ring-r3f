@@ -35,11 +35,10 @@ export default function OlszarRing(props) {
   // Diamond Mobile Controls
   const diamondMobileConfig = useMemo(() => {
     return {
-      metalness: { value: 0, min: 0, max: 8, step: .5 },
+      metalness: { value: 1.2, min: 0, max: 8, step: .5 },
       roughness: { value: 0, min: 0, max: 1, step: .01 },
-      ior: { value: 1.58, min: 0, max: 10 },
-      transmission: { value: 0.9, min: 0, max: 1, step: 0.01 },
-      color: '#73f4ff',
+      ior: { value: 2, min: 0, max: 10 },
+      transmission: { value: 0, min: 0, max: 1, step: 0.01 },
       // fastChroma: false
     }
   }, [])
@@ -84,13 +83,13 @@ export default function OlszarRing(props) {
     <group {...props} dispose={null}>
       <mesh name="kamienie-boczne" geometry={nodes['kamienie-boczne'].geometry} material={nodes['kamienie-boczne'].material}>
         {mobileControls.mobile
-          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} />
+          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
       <mesh name="kamień-centralny" geometry={nodes['kamień-centralny'].geometry} material={nodes['kamień-centralny'].material}>
         {mobileControls.mobile
-          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} />
+          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
