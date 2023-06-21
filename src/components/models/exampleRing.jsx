@@ -14,7 +14,8 @@ export default function ExampleRing(props) {
     const diamondTexture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
 
     // Ring Enviroment Map
-    const envTexture = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "ring/" })
+
+    const envMap = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env/" })
 
     // Diamond Controls
     const diamondConfig = useMemo(() => {
@@ -24,9 +25,6 @@ export default function ExampleRing(props) {
             ior: { value: 2.75, min: 0, max: 10 },
             fresnel: { value: 1, min: 0, max: 1 },
             color: '#56ccff',
-            distortion: { value: 1, min: 0, max: 1 },
-            depthScale: { value: 1, min: 0, max: 1 },
-            resolution: { value: 1, min: 0, max: 1 },
             // fastChroma: false
         }
     }, [])
@@ -50,10 +48,10 @@ export default function ExampleRing(props) {
     // /**
     //  * Mesh Standard Material
     //  */
-    const { metalness, roughness, color } = useControls("Kolor Pierścionka", {
-        metalness: { value: 1.08, min: 0, max: 2, step: .01 },
-        roughness: { value: 0.16, min: 0, max: 1, step: .01 },
-        color: "white"
+    const { metalness, roughness, color, envId } = useControls("Kolor Pierścionka", {
+        metalness: { value: 1, min: 0, max: 2, step: .01 },
+        roughness: { value: 0.1, min: 0, max: 1, step: .01 },
+        color: "white",
     });
 
     const ref = useRef()
@@ -67,20 +65,20 @@ export default function ExampleRing(props) {
                 castShadow
                 receiveShadow
                 geometry={nodes.Ring.geometry}
-                material={materials["White Gold"]}
+                // material={materials["White Gold"]}
                 position={[ringControls.x, ringControls.y, ringControls.z]}
             >
                 {/* <meshBasicMaterial color={ringConfig.color} envMap={envTexture} reflectivity={0.5} /> */}
-                <meshStandardMaterial metalness={metalness} envMap={envTexture} roughness={roughness} color={color} />
+                <meshPhysicalMaterial metalness={metalness} envMap={envMap} roughness={roughness} color={color} />
                 <mesh
                     name="Diamond_Holder"
                     castShadow
                     receiveShadow
                     geometry={nodes.Diamond_Holder.geometry}
-                    material={materials["White Gold"]}
+                // material={materials["White Gold"]}
                 >
                     {/* <meshBasicMaterial color={ringConfig.color} envMap={envTexture} reflectivity={0.5} /> */}
-                    <meshStandardMaterial metalness={metalness} envMap={envTexture} roughness={roughness} color={color} />
+                    <meshPhysicalMaterial metalness={metalness} envMap={envMap} roughness={roughness} color={color} />
                 </mesh>
                 <mesh
                     name="Diamonds"

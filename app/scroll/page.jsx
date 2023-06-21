@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useMemo } from "react"
 import ExampleRing from "@/components/models/exampleRing"
 import OlszarRing from "@/components/models/olszarRing"
+import { FinalRing } from '@/components/models/finalRing'
 import { useControls } from 'leva'
 
 // const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
@@ -49,7 +50,7 @@ export default function Page() {
                     <boxGeometry />
                     <meshStandardMaterial color="hotpink" />
                 </mesh> */}
-                <OlszarRing />
+                <FinalRing />
                 {/* <ExampleRing /> */}
                 <Common />
             </View>

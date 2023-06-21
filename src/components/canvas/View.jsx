@@ -12,7 +12,7 @@ export const Common = ({ color }) => {
     return {
       ambientStrength: { value: 0.05, min: 0, max: 1, step: 0.01 },
       ambientColor: "white",
-      pointLightIntensity: { value: 1.9, min: 0, max: 5, step: 0.01 },
+      pointLightIntensity: { value: 5, min: 0, max: 10, step: 0.01 },
       pointLightColor: "white",
     }
   })
@@ -23,10 +23,21 @@ export const Common = ({ color }) => {
     <Suspense fallback={null}>
       {color && <color attach='background' args={[color]} />}
       <ambientLight color={lightControls.ambientColor} intensity={lightControls.ambientStrength} />
-      <pointLight position={[20, 30, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
-      <pointLight position={[-10, -10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
-      {/* <pointLight position={[0, 0, 20]} color={lightControls.pointLightColor} /> */}
-      <PerspectiveCamera makeDefault fov={40} position={[0, 0, 6]} />
+      {/* Left/Right Lights */}
+      <pointLight position={[20, 0, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[-20, 0, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      {/* Top Side Lights */}
+      <pointLight position={[10, 10, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[-10, 10, 10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      {/* Bottom Side Lights */}
+      <pointLight position={[10, 10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      <pointLight position={[-10, 10, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity + 0.5} />
+      {/* Top/Bottom Lights */}
+      <pointLight position={[0, 30, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <pointLight position={[0, -30, 0]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      {/* Front Light */}
+      <pointLight position={[0, 0, -10]} color={lightControls.pointLightColor} intensity={lightControls.pointLightIntensity} />
+      <PerspectiveCamera makeDefault fov={30} position={[0, 0, 6]} />
     </Suspense>
   )
 }

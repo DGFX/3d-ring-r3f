@@ -16,9 +16,11 @@ export default function OlszarRing(props) {
   const { nodes, materials } = useGLTF('/olszar-ring.glb')
 
   const diamondTexture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
+  const diamondAltTexture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr')
 
   // Ring Enviroment Map
-  const envTexture = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "ring/" })
+  const envMap = useCubeTexture(["px.png", "nx.png", "py.png", "ny.png", "pz.png", "nz.png"], { path: "env/" })
+
 
   // Diamond Controls
   const diamondConfig = useMemo(() => {
@@ -28,80 +30,82 @@ export default function OlszarRing(props) {
       ior: { value: 2.75, min: 0, max: 10 },
       fresnel: { value: 1, min: 0, max: 1 },
       color: '#56ccff',
-      // fastChroma: false
     }
   }, [])
 
   // Diamond Mobile Controls
   const diamondMobileConfig = useMemo(() => {
     return {
-      metalness: { value: 1.2, min: 0, max: 8, step: .5 },
-      roughness: { value: 0, min: 0, max: 1, step: .01 },
+      metalness: { value: 1, min: 0, max: 8, step: .5 },
+      roughness: { value: 0.7, min: 0, max: 1, step: .01 },
       ior: { value: 2, min: 0, max: 10 },
       transmission: { value: 0, min: 0, max: 1, step: 0.01 },
-      // fastChroma: false
     }
   }, [])
 
   // Ring Position Controls
   const ringPositionConfig = useMemo(() => {
     return {
-      x: { value: 0, min: -6, max: 6, step: .1 },
+      x: { value: -1.7, min: -6, max: 6, step: .1 },
       y: { value: 0, min: -6, max: 6, step: .1 },
       z: { value: 0, min: 0, max: 6, step: .1 },
-      // color: "#d4af37",
-      // reflectivity: { value: 0.5, min: 0, max: 1, step: .1 }
     }
   }, [])
 
-  // /**
-  //  * Ring Material Controls
-  //  */
+  /**
+  * Ring Material Controls
+  */
   const ringMaterialConfig = useMemo(() => {
     return {
-      metalness: { value: 1.08, min: 0, max: 2, step: .01 },
-      roughness: { value: 0.16, min: 0, max: 1, step: .01 },
-      color: "white"
+      metalness: { value: 1, min: 0, max: 2, step: .01 },
+      roughness: { value: 0.1, min: 0, max: 1, step: .01 },
+      color: "white",
+      envId: { value: 0, min: 0, max: 8, step: 1 }
     }
   });
 
+  /**
+   * Mobile Config
+   */
   const mobileConfig = useMemo(() => {
     return {
       mobile: isMobile,
     }
   });
 
+  /**
+   * Controls
+   */
   const diamondControls = useControls("Kryształ", diamondConfig)
   const diamondMobileControls = useControls("Kryształ na telefonie", diamondMobileConfig)
-  // const ringPositionControls = useControls("Pierścionek", ringPositionConfig)
-  const ringMaterialControls = useControls("Pierścionek", ringMaterialConfig)
+  const ringPositionControls = useControls("Pozycja Pierścienia", ringPositionConfig)
+  const ringMaterialControls = useControls("Materiał Pierścienia", ringMaterialConfig)
   const mobileControls = useControls("Wersja", mobileConfig)
 
 
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} scale={0.06} position={[ringPositionControls.x, ringPositionControls.y, ringPositionControls.z,]}>
       <mesh name="kamienie-boczne" geometry={nodes['kamienie-boczne'].geometry} material={nodes['kamienie-boczne'].material}>
         {mobileControls.mobile
-          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} color={diamondControls.color} />
+          // Desktop and Mobile side diamonds version
+          ? <meshPhysicalMaterial envMap={envMap} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
       <mesh name="kamień-centralny" geometry={nodes['kamień-centralny'].geometry} material={nodes['kamień-centralny'].material}>
         {mobileControls.mobile
-          ? <meshPhysicalMaterial envMap={envTexture} {...diamondMobileControls} color={diamondControls.color} />
+          // Desktop and Mobile central diamond version
+          ? <meshPhysicalMaterial envMap={envMap} {...diamondMobileControls} color={diamondControls.color} />
           : <MeshRefractionMaterial envMap={diamondTexture} {...diamondControls} fastChroma={false} toneMapped={false} />
         }
       </mesh>
       <mesh name="oprawa" geometry={nodes.oprawa.geometry} material={nodes.oprawa.material}>
-        <meshPhysicalMaterial {...ringMaterialControls} />
+        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap} />
       </mesh>
       <mesh name="szyna" geometry={nodes.szyna.geometry} material={nodes.szyna.material}>
-        <meshPhysicalMaterial {...ringMaterialControls} />
+        <meshPhysicalMaterial {...ringMaterialControls} envMap={envMap} />
       </mesh>
-      {/* <AccumulativeShadows temporal frames={100} alphaTest={0.95} opacity={1} scale={20}>
-        <RandomizedLight amount={8} radius={10} ambient={0.5} position={[0, 10, -2.5]} bias={0.001} size={3} />
-      </AccumulativeShadows> */}
     </group>
   )
 }
