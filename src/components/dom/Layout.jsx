@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import dynamic from 'next/dynamic'
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 const Navbar = dynamic(() => import('@/components/dom/Navbar'), { ssr: false })
+const Scroll = dynamic(() => import('@/templates/Scroll'), { ssr: false })
 
 const Layout = ({ children }) => {
   const ref = useRef()
@@ -20,7 +21,9 @@ const Layout = ({ children }) => {
       }}
     >
       <Navbar style={{ opacity: "50%" }} />
-      {children}
+      <Scroll>
+        {children}
+      </Scroll>
       <Scene
         style={{
           position: 'fixed',
@@ -28,8 +31,7 @@ const Layout = ({ children }) => {
           left: 0,
           width: '100vw',
           height: '100vh',
-          pointerEvents: 'none',
-
+          pointerEvents: 'none'
         }}
         eventSource={ref}
         eventPrefix='client'

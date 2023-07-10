@@ -55,7 +55,6 @@ export default function ExampleRing(props) {
     });
 
     const ref = useRef()
-    console.log(ref)
     return (
         <group {...props} dispose={null}>
             <mesh

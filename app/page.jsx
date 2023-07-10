@@ -5,7 +5,7 @@ import ExampleRing from "@/components/models/exampleRing"
 import OlszarRing from "@/components/models/olszarRing"
 import { FinalRing } from '@/components/models/finalRing'
 import { useControls } from 'leva'
-import Scroll from '@/templates/Scroll'
+import Scroll, { ScrollTicker } from '@/templates/Scroll'
 
 // const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
@@ -38,70 +38,73 @@ export default function Page() {
 
   return (
     <>
-      <Scroll>
-        {/* <main className='z-10 relative'> */}
-        <section className="h-[100vh]">
-          <div className='container mx-auto h-full'>
-            <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
-              <div>
-                <h1>OLSZAR</h1>
-                <p className='w-full uppercase'>Jubiler & Pracownia Złotnicza</p>
-              </div>
-              <div>
-                <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
-                <button className='fontSize-sm'>historia marki olszar</button>
-              </div>
+      <section className="h-[100vh]">
+        <div className='container mx-auto h-full'>
+          <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
+            <div>
+              <h1>OLSZAR</h1>
+              <p className='w-full uppercase'>Jubiler & Pracownia Złotnicza</p>
+            </div>
+            <div>
+              <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+              <button className='fontSize-sm'>historia marki olszar</button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+      <div className='h-[30vh]'></div>
+      <section className="h-[100vh]">
         <div className='h-[50vh]'></div>
-        <section className="h-[100vh]">
-          <div className="container mx-auto h-full">
-            <div className="flex flex-col justify-start max-w-[550px] gap-[3rem]">
 
-              <h2>Lorem ipsum dolor sit</h2>
-              <p>Quisque turpis tortor, interdum quis magna nec, egestas venenatis tortor. Praesent sit amet libero luctus, auctor mauris et, malesuada mi. Praesent metus erat, luctus quis iaculis vel, sodales quis orci.</p>
-              <button>Historia marki OLSZAR</button>
-            </div>
-          </div>
-        </section>
-        <section className="h-[100vh]">
-          <div className="container mx-auto h-full">
-            <div className="ml-auto flex flex-col justify-start max-w-1/2 gap-[3rem]">
-              <h2>Lorem ipsum dolor sit</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
-            </div>
-          </div>
-        </section>
-        <section className="h-[100vh]">
-          <div className="container mx-auto h-full">
-            <div className="flex flex-col justify-start max-w-1/2 gap-[3rem]">
-              <h2>Lorem ipsum dolor sit</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
-              <button>Historia marki OLSZAR</button>
-            </div>
-          </div>
-        </section>
-        <section className="h-[100vh]">
-          <div className='container mx-auto h-full'>
-            <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
-              <div>
-                <h2 className='leading-none'>skonfiguruj własną biżuterię</h2>
-              </div>
-              <div>
-                <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
-                <button className='fontSize-sm'>historia marki olszar</button>
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* </main> */}
-      </Scroll>
+        <div className="container mx-auto h-full">
+          <div className="flex flex-col justify-start max-w-[550px] gap-[3rem]">
 
-      <View {...sceneControls} className='fixed top-0 flex h-screen w-full'>
+            <h2>Lorem ipsum dolor sit</h2>
+            <p>Quisque turpis tortor, interdum quis magna nec, egestas venenatis tortor. Praesent sit amet libero luctus, auctor mauris et, malesuada mi. Praesent metus erat, luctus quis iaculis vel, sodales quis orci.</p>
+            <button>Historia marki OLSZAR</button>
+          </div>
+        </div>
+      </section>
+      <div className='h-[30vh]'></div>
+      <section className="h-[100vh]">
+        <div className="container mx-auto h-full">
+          <div className="ml-auto flex flex-col justify-start max-w-1/2 gap-[3rem]">
+            <h2>Lorem ipsum dolor sit</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+          </div>
+        </div>
+      </section>
+      <div className='h-[30vh]'></div>
+      <section className="h-[100vh]">
+        <div className="container mx-auto h-full">
+          <div className="flex flex-col justify-start max-w-1/2 gap-[3rem]">
+            <h2>Lorem ipsum dolor sit</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+            <button>Historia marki OLSZAR</button>
+          </div>
+        </div>
+      </section>
+      <div className='h-[30vh]'></div>
+      <section className="h-[100vh]">
+        <div className='container mx-auto h-full'>
+          <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
+            <div>
+              <h2 className='leading-none'>skonfiguruj własną biżuterię</h2>
+            </div>
+            <div>
+              <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+              <button className='fontSize-sm'>historia marki olszar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <View {...sceneControls} className='fixed top-0 flex h-screen w-full pointer-events-none z-5'>
         <FinalRing />
         {/* <ExampleRing /> */}
         <Common />
+        <ScrollTicker />
       </View>
     </>
   )
