@@ -13,6 +13,9 @@ dependencies:
   '@react-three/postprocessing':
     specifier: ^2.14.9
     version: 2.14.9(@react-three/fiber@8.13.3)(@types/three@0.152.1)(react@18.2.0)(three@0.151.3)
+  '@studio-freight/lenis':
+    specifier: ^1.0.16
+    version: 1.0.16
   canvas-sketch-util:
     specifier: ^1.10.0
     version: 1.10.0
@@ -2168,6 +2171,10 @@ packages:
       react: '>= 16.3.0'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /@studio-freight/lenis@1.0.16:
+    resolution: {integrity: sha512-OeCBCafpaIfqFov4of/+cArunTL6wuN8hQkx3w/yJTh9Y84O82Y7tZ1xvU/HlvH+1M/tpltruxpddaI7ydTrnQ==}
     dev: false
 
   /@surma/rollup-plugin-off-main-thread@2.2.3:

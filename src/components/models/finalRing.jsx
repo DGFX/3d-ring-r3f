@@ -6,8 +6,8 @@ export const FinalRing = () => {
 
     return (
         <>
-            <OlszarRing />
-            {/* <ExampleRing /> */}
+            {/* <OlszarRing /> */}
+            <ExampleRing />
         </>
     )
 }

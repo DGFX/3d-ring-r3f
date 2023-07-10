@@ -10,9 +10,9 @@ import { EffectComposer, Bloom, Noise } from '@react-three/postprocessing'
 export const Common = ({ color }) => {
   const config = useMemo(() => {
     return {
-      ambientStrength: { value: 0.05, min: 0, max: 1, step: 0.01 },
+      ambientStrength: { value: 0, min: 0, max: 1, step: 0.01 },
       ambientColor: "white",
-      pointLightIntensity: { value: 5, min: 0, max: 25, step: 0.01 },
+      pointLightIntensity: { value: 0, min: 0, max: 25, step: 0.01 },
       pointLightColor: "white",
     }
   })
@@ -62,7 +62,7 @@ const View = forwardRef(({ children, orbit, spaceDust, noise, ...props }, ref) =
         <ViewImpl track={localRef}>
           {children}
           {orbit &&
-            <OrbitControls />}
+            <OrbitControls enablePan={false} enableZoom={false} />}
           {spaceDust && <SpaceDust count={250} />}
           <EffectComposer>
             <Bloom luminanceThreshold={1} intensity={0.85} levels={9} mipmapBlur />

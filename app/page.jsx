@@ -1,12 +1,13 @@
 'use client'
-import { useMemo } from "react"
 import dynamic from 'next/dynamic'
-import { Suspense } from 'react'
+import { useMemo } from "react"
+import ExampleRing from "@/components/models/exampleRing"
+import OlszarRing from "@/components/models/olszarRing"
+import { FinalRing } from '@/components/models/finalRing'
 import { useControls } from 'leva'
+import Scroll from '@/templates/Scroll'
 
-const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
-const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
+// const ExampleRing = dynamic(() => import("@/components/models/exampleRing").then(mod => mod.ExampleRing), { ssr: false })
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -27,59 +28,81 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page() {
 
+  const config = useMemo(() => {
+    return {
+      orbit: true,
+      spaceDust: false
+    }
+  }, [])
+  const sceneControls = useControls("Scena", config)
+
   return (
     <>
-      <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
-        {/* jumbo */}
-        <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-          <p className='w-full uppercase'>Next + React Three Fiber</p>
-          <h1 className='my-4 text-5xl font-bold leading-tight'>Next 3D Starter</h1>
-          <p className='mb-8 text-2xl leading-normal'>A minimalist starter for React, React-three-fiber and Threejs.</p>
-        </div>
+      <Scroll>
+        {/* <main className='z-10 relative'> */}
+        <section className="h-[100vh]">
+          <div className='container mx-auto h-full'>
+            <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
+              <div>
+                <h1>OLSZAR</h1>
+                <p className='w-full uppercase'>Jubiler & Pracownia Złotnicza</p>
+              </div>
+              <div>
+                <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+                <button className='fontSize-sm'>historia marki olszar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className='h-[50vh]'></div>
+        <section className="h-[100vh]">
+          <div className="container mx-auto h-full">
+            <div className="flex flex-col justify-start max-w-[550px] gap-[3rem]">
 
-        <div className='w-full text-center md:w-3/5'>
-          <View className='flex h-96 w-full flex-col items-center justify-center'>
-            <Suspense fallback={null}>
-              <Logo route='/blob' scale={0.6} position={[0, 0, 0]} />
-              <Common />
-            </Suspense>
-          </View>
-        </div>
-      </div>
+              <h2>Lorem ipsum dolor sit</h2>
+              <p>Quisque turpis tortor, interdum quis magna nec, egestas venenatis tortor. Praesent sit amet libero luctus, auctor mauris et, malesuada mi. Praesent metus erat, luctus quis iaculis vel, sodales quis orci.</p>
+              <button>Historia marki OLSZAR</button>
+            </div>
+          </div>
+        </section>
+        <section className="h-[100vh]">
+          <div className="container mx-auto h-full">
+            <div className="ml-auto flex flex-col justify-start max-w-1/2 gap-[3rem]">
+              <h2>Lorem ipsum dolor sit</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+            </div>
+          </div>
+        </section>
+        <section className="h-[100vh]">
+          <div className="container mx-auto h-full">
+            <div className="flex flex-col justify-start max-w-1/2 gap-[3rem]">
+              <h2>Lorem ipsum dolor sit</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+              <button>Historia marki OLSZAR</button>
+            </div>
+          </div>
+        </section>
+        <section className="h-[100vh]">
+          <div className='container mx-auto h-full'>
+            <div className='flex w-full flex-col items-center justify-between content-between p-12 text-center h-full'>
+              <div>
+                <h2 className='leading-none'>skonfiguruj własną biżuterię</h2>
+              </div>
+              <div>
+                <p className='pb-[25px] max-w-[553px]'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in magna sodales, commodo nibh lobortis, congue nisi. Vestibulum ipsum lorem, facilisis sed nisi id, venenatis vulputate urna. Curabitur ac leo non massa laoreet placerat.</p>
+                <button className='fontSize-sm'>historia marki olszar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* </main> */}
+      </Scroll>
 
-      <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
-        {/* first row */}
-        <div className='relative h-48 w-full py-6 sm:w-1/2 md:my-12 md:mb-40'>
-          <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Events are propagated</h2>
-          <p className='mb-8 text-gray-600'>Drag, scroll, pinch, and rotate the canvas to explore the 3D scene.</p>
-        </div>
-        <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
-          <View className='relative h-full  sm:h-48 sm:w-full'>
-            <Suspense fallback={null}>
-              <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} />
-              <Common color={'lightpink'} />
-            </Suspense>
-          </View>
-        </div>
-        {/* second row */}
-        <div className='relative my-12 h-48 w-full py-6 sm:w-1/2 md:mb-40'>
-          <View className='relative h-full animate-bounce sm:h-48 sm:w-full'>
-            <Suspense fallback={null}>
-              <Duck route='/blob' scale={2} position={[0, -1.6, 0]} />
-              <Common color={'lightblue'} />
-            </Suspense>
-          </View>
-        </div>
-        <div className='w-full p-6 sm:w-1/2'>
-          <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Dom and 3D are synchronized</h2>
-          <p className='mb-8 text-gray-600'>
-            3D Divs are renderer through the View component. It uses gl.scissor to cut the viewport into segments. You
-            tie a view to a tracking div which then controls the position and bounds of the viewport. This allows you to
-            have multiple views with a single, performant canvas. These views will follow their tracking elements,
-            scroll along, resize, etc.
-          </p>
-        </div>
-      </div>
+      <View {...sceneControls} className='fixed top-0 flex h-screen w-full'>
+        <FinalRing />
+        {/* <ExampleRing /> */}
+        <Common />
+      </View>
     </>
   )
 }

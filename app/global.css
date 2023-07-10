@@ -7,6 +7,29 @@
     box-sizing: border-box;
   }
 
+  html {
+    font-size: calc(0.75rem + 0.41666666666666663vw);
+  }
+
+  @media screen and (max-width:1920px) {
+    html {
+      font-size: calc(0.75rem + 0.41666666666666674vw);
+    }
+  }
+
+  @media screen and (max-width:1440px) {
+    html {
+      font-size: calc(0.9376951092611863rem + 0.20811654526534862vw);
+    }
+  }
+
+  @media screen and (max-width:479px) {
+    html {
+      font-size: calc(0.8744769874476988rem + 0.8368200836820083vw);
+    }
+  }
+
+
   html,
   body,
   #root {
@@ -19,11 +42,44 @@
 }
 
 body {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   background: rgb(0, 0, 0);
 }
 
 nav {
   z-index: 9999;
+}
+
+h1 {
+  font-family: Lora;
+  font-size: 6.83rem;
+  font-weight: 400;
+  letter-spacing: 0.68rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+h2 {
+  font-family: Lora;
+  font-size: 4.22rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+h3 {
+  font-family: Lora;
+  font-size: 2.61rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+button {
+  padding: 10px 40px;
+  border-radius: 88px;
+  border: 1px solid #FFF;
+  text-transform: uppercase;
+  line-height: 1;
 }
